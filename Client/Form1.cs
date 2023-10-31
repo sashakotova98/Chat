@@ -6,5 +6,11 @@ namespace Client
         {
             InitializeComponent();
         }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            var enter_window = new Enter_Window();
+            enter_window.Show();
+        }
     }
 }

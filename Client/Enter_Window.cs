@@ -16,5 +16,11 @@ namespace Client
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var login_window = new Login_Window();
+            login_window.Show();
+        }
     }
 }

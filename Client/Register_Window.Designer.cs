@@ -28,12 +28,54 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Register_Window";
+            passReg = new TextBox();
+            loginReg = new TextBox();
+            button1 = new Button();
+            SuspendLayout();
+            // 
+            // passReg
+            // 
+            passReg.Location = new Point(199, 152);
+            passReg.Name = "passReg";
+            passReg.PlaceholderText = "Password";
+            passReg.Size = new Size(337, 23);
+            passReg.TabIndex = 11;
+            // 
+            // loginReg
+            // 
+            loginReg.Location = new Point(199, 97);
+            loginReg.Name = "loginReg";
+            loginReg.PlaceholderText = "Login";
+            loginReg.Size = new Size(337, 23);
+            loginReg.TabIndex = 10;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(254, 204);
+            button1.Name = "button1";
+            button1.Size = new Size(197, 23);
+            button1.TabIndex = 9;
+            button1.Text = "Save";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // Register_Window
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(passReg);
+            Controls.Add(loginReg);
+            Controls.Add(button1);
+            Name = "Register_Window";
+            Text = "Register_Window";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private TextBox passReg;
+        private TextBox loginReg;
+        private Button button1;
     }
 }

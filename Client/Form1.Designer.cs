@@ -40,6 +40,7 @@
             btnStart.Size = new Size(425, 337);
             btnStart.TabIndex = 0;
             btnStart.UseVisualStyleBackColor = true;
+            btnStart.Click += btnStart_Click;
             // 
             // Form1
             // 
@@ -47,6 +48,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(424, 337);
             Controls.Add(btnStart);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
+            MaximizeBox = false;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Client";
