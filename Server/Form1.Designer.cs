@@ -28,30 +28,61 @@ partial class Form1
     /// </summary>
     private void InitializeComponent()
     {
-        btnStart = new Button();
+        lbMessage = new ListBox();
+        label1 = new Label();
+        lbContacts = new ListBox();
         SuspendLayout();
         // 
-        // btnStart
+        // lbMessage
         // 
-        btnStart.Location = new Point(273, 142);
-        btnStart.Name = "btnStart";
-        btnStart.Size = new Size(232, 109);
-        btnStart.TabIndex = 0;
-        btnStart.Text = "Start";
-        btnStart.UseVisualStyleBackColor = true;
+        lbMessage.BackColor = SystemColors.ActiveCaption;
+        lbMessage.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
+        lbMessage.FormattingEnabled = true;
+        lbMessage.ItemHeight = 20;
+        lbMessage.Location = new Point(294, 47);
+        lbMessage.Margin = new Padding(2);
+        lbMessage.Name = "lbMessage";
+        lbMessage.Size = new Size(591, 284);
+        lbMessage.TabIndex = 1;
+        // 
+        // label1
+        // 
+        label1.AutoSize = true;
+        label1.Location = new Point(28, 17);
+        label1.Margin = new Padding(2, 0, 2, 0);
+        label1.Name = "label1";
+        label1.Size = new Size(58, 15);
+        label1.TabIndex = 10;
+        label1.Text = "контакты";
+        // 
+        // lbContacts
+        // 
+        lbContacts.FormattingEnabled = true;
+        lbContacts.ItemHeight = 15;
+        lbContacts.Location = new Point(28, 47);
+        lbContacts.Margin = new Padding(2);
+        lbContacts.Name = "lbContacts";
+        lbContacts.Size = new Size(262, 289);
+        lbContacts.TabIndex = 9;
         // 
         // Form1
         // 
-        AutoScaleDimensions = new SizeF(10F, 25F);
+        AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(800, 450);
-        Controls.Add(btnStart);
+        ClientSize = new Size(898, 349);
+        Controls.Add(label1);
+        Controls.Add(lbContacts);
+        Controls.Add(lbMessage);
+        Margin = new Padding(2);
         Name = "Form1";
-        Text = "Form1";
+        Text = "Server";
+        FormClosing += Form1_FormClosing;
         ResumeLayout(false);
+        PerformLayout();
     }
 
     #endregion
-
-    private Button btnStart;
+    private ListBox lbMessage;
+    private Label label1;
+    private ListBox lbContacts;
 }
