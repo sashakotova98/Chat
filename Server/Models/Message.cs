@@ -11,10 +11,10 @@ namespace Server.Models
     {
         public int Id { get; set; }
 
-        public int ChatId { get; set; }
+        public int? ChatId { get; set; }
         [ForeignKey("ChatId")]
 
-        public Chat Chats { get; set; } = null!;
+        public Chat? Chats { get; set; } 
 
         
 

@@ -9,6 +9,7 @@ namespace Client
         {
             InitializeComponent();
             Client.Instance.SubscribeNewRegistReceived(OnNewMessageReceived);
+           
         }
 
         private void bntRegistration_Click(object sender, EventArgs e)
@@ -36,12 +37,15 @@ namespace Client
                     this.Invoke(new Action(() =>
                     {
                         tbMsg.Text = message;
+                        
                     }));
                     break;
                 case "Successfully registered":
                     this.Invoke(new Action(() =>
                     {
                         tbMsg.Text = message;
+                        Client_Window clientForm = new Client_Window();
+                        clientForm.Show();
                     }));
                     await Task.Delay(1000);
                     this.Invoke(new Action(() =>
@@ -49,6 +53,7 @@ namespace Client
                         this.Hide();
                     }));
                     break;
+              
 
                    
             }

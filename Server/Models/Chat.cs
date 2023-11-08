@@ -12,6 +12,6 @@ namespace Server.Models
         [Key]
         public int Id { get; set; }
 
-        public string Chat_Name { get; set; }
+        public string? Chat_Name { get; set; }
     }
 }

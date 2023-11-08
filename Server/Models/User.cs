@@ -9,6 +9,8 @@ namespace Server.Models
         public int Id { get; set; }
         public DateTime RegisteredDate { get; set; }
 
+        public DateTime? BannedTo { get; set; }
+
 
         [ForeignKey(nameof(ChatId))]
         public Chat? Chat { get; set; }
@@ -23,5 +25,7 @@ namespace Server.Models
         [ForeignKey(nameof(LoginUser))]
         public LoginPassword LoginPaasword { get; set; } = null!;
         public string LoginUser { get; set; } = null!;
+
+
     }
 }

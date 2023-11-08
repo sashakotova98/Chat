@@ -9,11 +9,12 @@ namespace Server.Models
         public DbSet<Role> Roles { get; set; } 
         public DbSet<Message> Messages { get; set; } 
         public DbSet<Chat> Chats { get; set; } 
-        public DbSet<BannedUser> BannedUsers { get; set; } 
+      
 
         public ChatDbContext(DbContextOptions<ChatDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
+            //Database.EnsureDeleted();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
