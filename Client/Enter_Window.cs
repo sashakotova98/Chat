@@ -6,10 +6,17 @@ namespace Client
 {
     public partial class Enter_Window : Form
     {
+        private Admin_Window adminForm;
+        private Client_Window clientForm;
+
+
         public Enter_Window()
         {
             InitializeComponent();
             Client.Instance.SubscribeToNewMsg(OnNewMessageReceived);
+
+            adminForm = new Admin_Window();
+            clientForm = new Client_Window();
         }
 
         private void btnEnter_Click(object sender, EventArgs e)
@@ -51,8 +58,7 @@ namespace Client
                     this.Invoke(new Action(() =>
                     {
                         this.Hide();
-                        Admin_Window adminForm = new Admin_Window();
-                        adminForm.Show();
+                        adminForm.Visible = true;
                     }));                        
                         
                     break;
@@ -66,8 +72,7 @@ namespace Client
                     this.Invoke(new Action(() =>
                     {
                         this.Hide();
-                        Client_Window clientForm = new Client_Window();
-                        clientForm.Show();
+                        clientForm.Visible = true;
                     }));
                     break;
             

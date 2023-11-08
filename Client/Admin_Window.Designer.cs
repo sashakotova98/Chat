@@ -104,6 +104,7 @@
             btnSend.TabIndex = 6;
             btnSend.Text = "Send";
             btnSend.UseVisualStyleBackColor = true;
+            btnSend.Click += btnSend_Click;
             // 
             // btnDeleteUser
             // 
@@ -114,6 +115,7 @@
             btnDeleteUser.TabIndex = 8;
             btnDeleteUser.Text = "Delete User";
             btnDeleteUser.UseVisualStyleBackColor = true;
+            btnDeleteUser.Click += btnDeleteUser_Click;
             // 
             // btnBanUser
             // 
@@ -124,6 +126,7 @@
             btnBanUser.TabIndex = 9;
             btnBanUser.Text = "Ban User";
             btnBanUser.UseVisualStyleBackColor = true;
+            btnBanUser.Click += btnBanUser_Click;
             // 
             // btnAddNewUser
             // 
@@ -154,7 +157,6 @@
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "Admin_Window";
             Text = "Admin_Window";
-            Load += Admin_Window_Load;
             ResumeLayout(false);
             PerformLayout();
         }

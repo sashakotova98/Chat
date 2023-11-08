@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic.Logging;
+using System.IO;
 
 
 namespace Client
@@ -15,6 +16,12 @@ namespace Client
         private TcpClient _tcpClient;
         public Func<string, Task> NewMessageReceived;
         public Func<string, Task> NewRegistReceived;
+        public List<Action<List<string>>> UpdateListContacts = new List<Action<List<string>>>();
+        public Action<string> UpdateListBox;
+        public Action<string> UpdateListBoxAdmin;
+
+        public string LoggedInAs { get; private set; }
+
         public static Client Instance { get; private set; }
 
         public static Client Init()
@@ -47,7 +54,23 @@ namespace Client
             NewRegistReceived = handler;
         }
 
-     
+        public void SubscribeToUpdate(Action<List<string>> handler)
+        {
+            UpdateListContacts.Add(handler);
+        }
+        public void SubscribeToReceivingMessages(Action<string> handler)
+        {
+            UpdateListBox = handler;
+        }
+
+
+        public void SubscribeToReceivingMessagesToAdmin(Action<string> handler)
+        {
+            UpdateListBoxAdmin = handler;
+        }
+
+
+
 
         public void SendMessege(string action, string log, string pas)
         {
@@ -55,6 +78,10 @@ namespace Client
             {
                 throw new ArgumentException("Action must be 'registration' or 'login'.");
             }
+
+
+            if (action == "login")
+                LoggedInAs = log;
 
             try
             {
@@ -67,6 +94,54 @@ namespace Client
                 MessageBox.Show(ex.Message);
             }
         }
+
+
+        public void SendMessegeToDelete(string recipient)
+        {
+            try
+            {
+                using var stream = new StreamWriter(_tcpClient.GetStream(), new UTF8Encoding(false), leaveOpen: true);
+                stream.Write($"delete-user|{recipient}\n");
+                stream.Flush();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        public void SendMessegeToClients( string message, string recipient)
+        {
+            try
+            {
+                using var stream = new StreamWriter(_tcpClient.GetStream(), new UTF8Encoding(false), leaveOpen: true);
+                stream.Write($"message|{message}|{recipient}\n");
+                stream.Flush();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void SendBanClient( string recipient)
+        {
+            try
+            {
+                using var stream = new StreamWriter(_tcpClient.GetStream(), new UTF8Encoding(false), leaveOpen: true);
+                stream.Write($"ban|{recipient}\n");
+                stream.Flush();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
 
 
         public async Task RecieveMessage()
@@ -91,7 +166,26 @@ namespace Client
                     {
                          await NewRegistReceived(message);
                     }
+                    else if(message.StartsWith("update-clients"))
+                    {
+                        var clientList = message.Split("|")[1];
+                        var clientNames = clientList.Split(',').ToList();
 
+                        foreach ( var UpdateListContact in UpdateListContacts)
+                        {
+                            UpdateListContact(clientNames);
+                        }
+                    }
+                    else if (message.StartsWith("message"))
+                    {
+                        var parts = message.Split('|');
+                        var command = parts[0];
+                        var text = parts[1];
+                        var recipient = parts[2];
+
+                        UpdateListBox(text);
+                        UpdateListBoxAdmin($"{recipient} => {text}");
+                    }
                 }
             }
 
